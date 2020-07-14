@@ -1,0 +1,31 @@
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: prak-aws-efs
+provisioner: pk-course/aws-efs
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: prak-efs-joomla
+  annotations:
+    volume.beta.kubernetes.io/storage-class: "prak-aws-efs"
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 10Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: prak-efs-mysql
+  annotations:
+    volume.beta.kubernetes.io/storage-class: "prak-aws-efs"
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 10Gi
